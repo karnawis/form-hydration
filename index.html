@@ -1,0 +1,45 @@
+<html>
+<head>
+    <title>Form Hydration</title>
+</head>
+    <body>
+        <h1>Hydrated Form</h1>
+        <p>Welcome to form page</p>
+        <form id="multi-step-form">
+            <div id="step-1" class="step">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name">
+            </div>
+            
+            <div id="step-2" class="step">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email">
+            </div>
+            <div id="step-3" class="step">
+                <label for="phone">Phone:</label>
+                <input type="tel" id="phone" name="phone">
+                <button type="submit">Submit</button>
+            </div>
+        </form>
+        <script src="/js/main.js"></script>
+    </body>
+</html>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.getElementById('multi-step-form');
+        const inputs = form.querySelectorAll('input');
+
+        inputs.forEach(input => {
+            // Load saved data from localStorage
+            const savedValue = localStorage.getItem(input.name);
+            if (savedValue) {
+                input.value = savedValue;
+            }
+
+            // Save data to localStorage on focus out
+            input.addEventListener('blur', function() {
+                localStorage.setItem(input.name, input.value);
+            });
+        });
+    });
+</script>
