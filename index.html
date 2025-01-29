@@ -1,45 +1,25 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Form Hydration</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form with Local Storage and Rehydration</title>
 </head>
-    <body>
-        <h1>Hydrated Form</h1>
-        <p>Welcome to form page</p>
-        <form id="multi-step-form">
-            <div id="step-1" class="step">
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="name">
-            </div>
-            
-            <div id="step-2" class="step">
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email">
-            </div>
-            <div id="step-3" class="step">
-                <label for="phone">Phone:</label>
-                <input type="tel" id="phone" name="phone">
-                <button type="submit">Submit</button>
-            </div>
-        </form>
-        <script src="/js/main.js"></script>
-    </body>
+<body>
+    <h1>Email-Based Form with Local Storage</h1>
+    <form id="entryForm">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        <br><br>
+        <label for="message">Message:</label>
+        <textarea id="message" name="message"></textarea>
+        <br><br>
+        <button type="submit">Save Entry</button>
+    </form>
+
+    <h2>Saved Entries</h2>
+    <ul id="entriesList"></ul>
+
+    <script src="/js/main.js"></script>
+</body>
 </html>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const form = document.getElementById('multi-step-form');
-        const inputs = form.querySelectorAll('input');
-
-        inputs.forEach(input => {
-            // Load saved data from localStorage
-            const savedValue = localStorage.getItem(input.name);
-            if (savedValue) {
-                input.value = savedValue;
-            }
-
-            // Save data to localStorage on focus out
-            input.addEventListener('blur', function() {
-                localStorage.setItem(input.name, input.value);
-            });
-        });
-    });
-</script>
